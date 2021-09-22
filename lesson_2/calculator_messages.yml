@@ -1,0 +1,14 @@
+en:
+  welcome: "Let's Calculate! Tell me your name!"
+  valid_name: "Make sure to use a valid name."
+  first_num: "What is the first number?"
+  sec_num: "What is the second number?"
+  valid_num: "That is not a valid number..."
+  operation: 
+  oper_err: "Must choose + - * or /"
+  repeat: "Do you want to do another calculation? (Y to calculate again)"
+  goodbye: "Thank you, goodbye."
+es:
+  welcome: "Bienvenido a la calculadora! Entre su nombre:"
+  valid_name: "Asegurese de entrar un nombre valido."
+  

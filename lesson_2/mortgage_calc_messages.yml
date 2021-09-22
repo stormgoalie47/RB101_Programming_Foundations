@@ -1,0 +1,8 @@
+welcome: "Welcome to the mortgage/car loan calculator!"
+loan_amount: "How much is the loan for?"
+invalid_num: "That is not a valid number."
+apr: "What is the annual percentage rate (APR)? Must be a decimal (6.2)"
+duration: "How long is the loan for (years)?"
+again: "Would you like to calculate another mortgage? (Y/N)"
+goodbye: "Thank you, Good bye!"
+break: "--------------------------------------------"
