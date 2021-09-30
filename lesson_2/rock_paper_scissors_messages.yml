@@ -1,0 +1,24 @@
+welcome: "Welcome to Rock, Paper, Scissors, Spock, Lizard!\n\n
+          This is a change on the traditional, Rock Paper Scissors
+          we all played as a kid(or an adult).\n\n
+          Below are the winning conditions:\n\n
+          Object        Destroys\n
+          Rock          Scissors, Lizard\n
+          Paper         Rock, Spock\n
+          Scissors      Paper, Lizard\n
+          Spock         Rock, Scissors\n
+          Lizard        Paper, Spock\n\n"
+abbreviations: "R: rock, P: paper, Sc: scissors, Sp: spock, L: lizard"
+rounds: "You will play to a set number of rounds won to determine the grand winner.\n\n
+         Whichever player reaches this number first, wins!\n\n
+         How many rounds would you like to play for each match?\n
+         Must be a number greater than 0."
+invalid: "That's not a valid choice. Try again."
+continue: "Press 'return' to continue."
+won_round: "You won that round!"
+tie_round: "You tied that round."
+lost_round: "You lost that round... Maybe next time!"
+won_match: "You won the match!!! Congratulations!"
+lost_match: "You lost the match... You will get them next time!"
+play_again: "Would you like to play again? (Y/N)"
+goodbye: "Thank you for playing! Goodbye!"
