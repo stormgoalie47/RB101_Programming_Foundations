@@ -1,14 +1,13 @@
 welcome: "Welcome to Rock, Paper, Scissors, Spock, Lizard!\n\n
           This is a change on the traditional, Rock Paper Scissors
-          we all played as a kid(or an adult).\n\n
-          Below are the winning conditions:\n\n
-          Object        Destroys\n
-          Rock          Scissors, Lizard\n
-          Paper         Rock, Spock\n
-          Scissors      Paper, Lizard\n
-          Spock         Rock, Scissors\n
-          Lizard        Paper, Spock\n\n"
-abbreviations: "R: rock, P: paper, Sc: scissors, Sp: spock, L: lizard"
+          we all played as a kid(or an adult).\n\n\n"
+rules: "Below are the winning rules:\n\n
+        Scissors cuts Paper cover Rock crushes\n
+        Lizard poison Spock smashes Scissors\n
+        decapitates Lizard eats Paper disproves\n
+        Spock vaporizes Rock crushes Scissors."
+abbreviations: "R: rock, P: paper, Sc: scissors, Sp: spock, L: lizard\n
+                Note: 'Liz' will also work for lizard"
 rounds: "You will play to a set number of rounds won to determine the grand winner.\n\n
          Whichever player reaches this number first, wins!\n\n
          How many rounds would you like to play for each match?\n

@@ -31,12 +31,11 @@ def get_rounds
   loop do
     rounds = gets.chomp
     if (rounds == rounds.to_i.to_s) && (rounds.to_i > 0)
-      break
+      return rounds.to_i
     else
       prompt MESSAGES['invalid']
     end
   end
-  rounds.to_i
 end
 
 def choice_abbreviation(choice)
@@ -62,12 +61,11 @@ def get_choice
     clear_prompt
 
     if VALID_CHOICES.include?(choice)
-      break
+      return choice
     else
       prompt MESSAGES['invalid']
     end
   end
-  choice
 end
 
 def win?(first, second)
@@ -79,8 +77,6 @@ def add_score(player, computer, score)
     score[0] += 1
   elsif win?(computer, player)
     score[1] += 1
-  else
-    score[2] += 1
   end
 end
 
@@ -113,17 +109,18 @@ def prompt_end_match(max, score)
   end
 end
 
+VALID_YES_NO = %w(y yes n no)
+
 def play_again?
   loop do
     prompt MESSAGES['play_again']
     answer = gets.chomp.downcase
+
+    next if !VALID_YES_NO.include?(answer)
     if answer.start_with?('n')
       return false
-    elsif answer.start_with?('y')
-      return true
     else
-      prompt MESSAGES['invalid']
-      next
+      return true
     end
   end
 end
@@ -132,11 +129,14 @@ clear_prompt
 prompt MESSAGES['welcome']
 return_continue
 
+prompt MESSAGES['rules']
+return_continue
+
 prompt MESSAGES['rounds']
 rounds = get_rounds
 clear_prompt
 
-score = [0, 0, 0]
+score = [0, 0]
 
 loop do
   loop do
@@ -157,6 +157,7 @@ loop do
 
   break unless play_again?
   clear_prompt
+  score = [0, 0]
 end
 
 clear_prompt
