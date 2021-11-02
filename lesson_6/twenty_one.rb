@@ -165,7 +165,7 @@ def display_score(score)
   return_to_continue
 end
 
-def set_score_goal(answer)
+def get_score_goal(answer)
   custom_goal = nil
   if answer
     loop do
@@ -222,7 +222,7 @@ prompt "GOOD LUCK!!!"
 
 return_to_continue
 
-SCORE_GOAL = set_score_goal(change_goal?)
+SCORE_GOAL = get_score_goal(change_goal?)
 DEALER_STAY = SCORE_GOAL - 4
 
 loop do
