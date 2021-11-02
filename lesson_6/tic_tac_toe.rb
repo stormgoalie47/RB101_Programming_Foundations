@@ -86,7 +86,7 @@ def return_to_continue
   gets
 end
 
-def first_move?
+def get_first_move
   prompt "Would you like to go first? (y/n)."
   prompt "Type anything else to let computer decide!"
   answer = gets.chomp.downcase
@@ -97,10 +97,9 @@ def first_move?
                else
                  ["Player", "Computer"].sample
                end
-  move_first
 end
 
-def board_size?
+def get_board_size
   loop do
     prompt "What size board would you like to play on? Enter 3-9"
     dimension = gets.chomp
@@ -211,9 +210,9 @@ def computer_places_piece!(brd)
   square = nil
 
   square = computer_offense(square, brd)
-  square = computer_defense(square, brd) if !square
-  square = 5 if !square && empty_squares(brd).include?(5)
-  square = empty_squares(brd).sample if !square
+  square ||= computer_defense(square, brd)
+  square ||= 5 if empty_squares(brd).include?(5)
+  square ||= empty_squares(brd).sample
 
   brd[square] = COMPUTER_MARKER
 end
@@ -300,8 +299,8 @@ return_to_continue
 loop do
   system "clear"
   score = { player: 0, computer: 0 }
-  start_player = first_move?
-  board_dimension = board_size?
+  start_player = get_first_move
+  board_dimension = get_board_size
 
   loop do
     board = initialize_board(board_dimension)
