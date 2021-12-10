@@ -1,10 +1,9 @@
-require "pry"
-require "pry-byebug"
-
 SUITS = %w(H D C S)
 FACE_VALUES = %w(2 3 4 5 6 7 8 9 10 J Q K A)
 MATCH_GOAL = 5
 VALID_YES_NO = %w(y yes n no)
+HIT = %w(h hit)
+STAY = %w(s stay)
 
 def prompt(msg)
   puts ">>\t #{msg}\n\n"
@@ -62,9 +61,9 @@ def player_turn!(cards, hand)
     answer = gets.chomp.downcase
     system "clear"
 
-    if answer == "h"
+    if HIT.include?(answer)
       hand[:player] << cards.shift
-    elsif answer == "s"
+    elsif STAY.include?(answer)
       break
     else
       prompt "Invalid option. Try again.\n"
@@ -73,6 +72,7 @@ def player_turn!(cards, hand)
     display_cards(hand)
     break if bust?(hand[:player])
   end
+  system "clear"
 end
 
 def dealer_turn!(cards, hand)
@@ -90,7 +90,7 @@ def determine_ace_score(hand, score)
   end
   if num_aces > 0 && score + 11 <= SCORE_GOAL
     score += 11
-  elsif num_aces > 0 && score + 11 >= SCORE_GOAL
+  elsif num_aces > 0
     score += 1
   end
 
@@ -162,14 +162,13 @@ def display_score(score)
   prompt "Current score
           Dealer: #{score[:dealer]}
           Player: #{score[:player]}"
-  return_to_continue
 end
 
 def get_score_goal(answer)
   custom_goal = nil
   if answer
     loop do
-      prompt "What number would you like to play to?"
+      prompt "What number would you like to play to? (i.e. 21, 31, 41, etc.)"
       custom_goal = gets.chomp
       break if valid_goal?(custom_goal)
       system "clear"
@@ -195,8 +194,7 @@ def change_goal?
   answer = nil
   loop do
     prompt "Currently, the game is set to play to 21
-          Would you like to change it to a different number?
-          (i.e. 31, 41, 51, etc.)"
+          Would you like to change it to a different number? (y/n)"
     answer = gets.chomp
     break if VALID_YES_NO.include?(answer)
     system "clear"
@@ -207,18 +205,16 @@ end
 
 system "clear"
 
-# rubocop:disable Layout/LineLength
 prompt "Welcome to 21 (or whatever number you may choose!)"
 prompt "Below are the rules:"
-prompt "The goal of the game is to get to the specified number without going over!\n
-         You will go first, knowing your cards and one of the dealer's cards.\n
-         You must make the decision to hit or stay.\n
-         If you go over the desired number (bust), you lose...\n
+prompt %(The goal is to get to the specified number without going over!
+         You will go first, knowing your cards and one of the dealer's cards.
+         You must make the decision to hit or stay.
+         If you go over the desired number \(bust\), you lose...
          The dealer will go until it reaches 4 below the desired number.
-         \t(i.e. for 21, the dealer will stop once it reaches 17)\n
-         You will play until you or the dealer reaches 5!"
+         \t\(i.e. for 21, the dealer will stop once it reaches 17\)
+         You will play until you or the dealer reaches 5!")
 prompt "GOOD LUCK!!!"
-# rubocop:enable Layout/LineLength
 
 return_to_continue
 
@@ -235,6 +231,7 @@ loop do
     hands = { player: [], dealer: [] }
     deal_cards!(deck, hands)
     display_cards(hands)
+    display_score(scores)
 
     loop do
       player_turn!(deck, hands)
@@ -244,7 +241,6 @@ loop do
       break if bust?(hands[:player])
 
       dealer_turn!(deck, hands)
-
       display_all_cards(hands)
       break
     end
@@ -253,6 +249,7 @@ loop do
     display_winner(winner)
     add_score(scores, winner)
     display_score(scores)
+    return_to_continue
     break if scores.values.include?(MATCH_GOAL)
   end
 
